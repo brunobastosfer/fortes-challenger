@@ -14,28 +14,6 @@ interface Usuario {
 
 const LoginScreen: React.FC = () => {
   const [isRegisterForm, setIsRegisterForm] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleSignin = (e: FormEvent) => {
-    e.preventDefault();
-    const usersString = localStorage.getItem('users');
-    const users = usersString ? JSON.parse(usersString) : [];
-    const user = users.find((u: Usuario) => u.email === email && u.password === password);
-    console.log("email =>",email)
-    console.log("passwd =>",password)
-
-    if (user) {
-      // setDataAuthenticated(true);
-      // navigate('/')
-    } else {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Usuário e/ou senha inválidos!",
-      });
-    }
-  };
 
   const toggleForm = () => {
     setIsRegisterForm(!isRegisterForm);
@@ -53,11 +31,6 @@ const LoginScreen: React.FC = () => {
       <RightSide>
         <Container>
           <img src="https://www.fortestecnologia.com.br/wp-content/themes/Fortes-ws2022/assets/images/logo_fortes.svg" alt="Logo" className="logo" />
-          {/* {
-            isRegisterForm ?
-              <FormComponent toggleForm={toggleForm} isRegisterForm={isRegisterForm} />
-              : <h1>Olá</h1>
-          } */}
           <FormComponent toggleForm={toggleForm} isRegisterForm={isRegisterForm} />
         </Container>
       </RightSide>

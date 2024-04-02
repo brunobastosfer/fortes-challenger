@@ -44,6 +44,15 @@ const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterFor
   const handleSignup = (e: FormEvent) => {
     e.preventDefault();
     const usersString = localStorage.getItem('users');
+    const userAlreadyExists = usersString ? JSON.parse(usersString).find((u: Usuario) => u.email === email) : false;
+    if(userAlreadyExists){
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Usuário já cadastrado!",
+      });
+      return;
+    }
     const users = usersString ? JSON.parse(usersString) : [];
     const user = {
       id: uuidv4(),
