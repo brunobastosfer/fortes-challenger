@@ -6,6 +6,8 @@ import {v4 as uuidv4} from 'uuid';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { UserOutlined } from '@ant-design/icons';
 import Swal from 'sweetalert2';
+import { useGlobalContext } from "../../shared/hooks/useGlobalContext";
+import { useNavigate } from "react-router-dom";
 
 interface Usuario {
   username: string;
@@ -21,6 +23,8 @@ interface FormComponentProps {
 const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterForm }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const { isAuthenticated, setAcess } = useGlobalContext();
+  const navigate = useNavigate();
 
   const handleSignin = (e: FormEvent) => {
     e.preventDefault();
@@ -29,8 +33,8 @@ const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterFor
     const user = users.find((u: Usuario) => u.username === username && u.password === password);
 
     if (user) {
-      // setDataAuthenticated(true);
-      // navigate('/')
+      setAcess(true);
+      navigate('/')
     } else {
       Swal.fire({
         icon: "error",
@@ -61,6 +65,7 @@ const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterFor
     };
     users.push(user);
     localStorage.setItem('users', JSON.stringify(users));
+    toggleForm();
   };
   return (
     <LoginForm>

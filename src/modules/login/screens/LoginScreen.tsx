@@ -3,6 +3,7 @@ import { Container, BackgroundImage, BackgroundImageContainer, HeaderText, Right
 import FormComponent from '../components/Form';
 import {v4 as uuidv4} from 'uuid';
 import { format } from 'date-fns';
+import { useGlobalContext } from '../../shared/hooks/useGlobalContext';
 
 interface Usuario {
   username: string;
