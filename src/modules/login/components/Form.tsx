@@ -8,7 +8,7 @@ import { UserOutlined } from '@ant-design/icons';
 import Swal from 'sweetalert2';
 
 interface Usuario {
-  email: string;
+  username: string;
   password: string;
 }
 
@@ -18,16 +18,14 @@ interface FormComponentProps {
 }
 
 const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterForm }) => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSignin = (e: FormEvent) => {
     e.preventDefault();
     const usersString = localStorage.getItem('users');
     const users = usersString ? JSON.parse(usersString) : [];
-    const user = users.find((u: Usuario) => u.email === email && u.password === password);
-    console.log("email =>",email)
-    console.log("passwd =>",password)
+    const user = users.find((u: Usuario) => u.username === username && u.password === password);
 
     if (user) {
       // setDataAuthenticated(true);
@@ -44,7 +42,7 @@ const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterFor
   const handleSignup = (e: FormEvent) => {
     e.preventDefault();
     const usersString = localStorage.getItem('users');
-    const userAlreadyExists = usersString ? JSON.parse(usersString).find((u: Usuario) => u.email === email) : false;
+    const userAlreadyExists = usersString ? JSON.parse(usersString).find((u: Usuario) => u.username === username) : false;
     if(userAlreadyExists){
       Swal.fire({
         icon: "error",
@@ -56,7 +54,7 @@ const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterFor
     const users = usersString ? JSON.parse(usersString) : [];
     const user = {
       id: uuidv4(),
-      email,
+      username,
       password
     };
     users.push(user);
@@ -65,7 +63,7 @@ const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterFor
   return (
     <LoginForm>
       <Space direction="horizontal">
-        <Input style={{ marginBottom: 10 }} size="large" placeholder="Email" prefix={<UserOutlined />} onChange={ (e) => setEmail(e.target.value) }/>
+        <Input style={{ marginBottom: 10 }} size="large" placeholder="Usuario" prefix={<UserOutlined />} onChange={ (e) => setUsername(e.target.value) }/>
       </Space>
       <Space direction="vertical">
         <Input.Password

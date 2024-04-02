@@ -1,14 +1,10 @@
-import React, { FormEvent, useState } from 'react';
-import { Container, BackgroundImage, BackgroundImageContainer, HeaderText, LoginForm, RightSide, SubheaderText, TextOverlay, ContainerMain, ForgetPassword, RegisterText } from '../styles/loginScreen.styles';
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
-
-import { UserOutlined } from '@ant-design/icons';
-import { Input, Space, Button } from 'antd';
-import Swal from 'sweetalert2';
+import React, { useState, useEffect } from 'react';
+import { Container, BackgroundImage, BackgroundImageContainer, HeaderText, RightSide, SubheaderText, TextOverlay, ContainerMain } from '../styles/loginScreen.styles';
 import FormComponent from '../components/Form';
+import {v4 as uuidv4} from 'uuid';
 
 interface Usuario {
-  email: string;
+  username: string;
   password: string;
 }
 
@@ -18,6 +14,19 @@ const LoginScreen: React.FC = () => {
   const toggleForm = () => {
     setIsRegisterForm(!isRegisterForm);
   };
+
+  useEffect(() => {
+    const usersString = localStorage.getItem('users');
+    const userAlreadyExists = usersString ? JSON.parse(usersString).find((u: Usuario) => u.username === "Fortes") : false;
+    if(!userAlreadyExists) {
+      const user = {
+        id: uuidv4(),
+        username: "Fortes",
+        password: "123"
+      };
+      localStorage.setItem('users', JSON.stringify([user]));
+    }
+  }, [])
 
   return (
     <ContainerMain>
