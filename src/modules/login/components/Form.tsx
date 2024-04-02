@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 interface Usuario {
   username: string;
   password: string;
+  created_at: Date;
 }
 
 interface FormComponentProps {
@@ -55,7 +56,8 @@ const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterFor
     const user = {
       id: uuidv4(),
       username,
-      password
+      password,
+      created_at: new Date(),
     };
     users.push(user);
     localStorage.setItem('users', JSON.stringify(users));

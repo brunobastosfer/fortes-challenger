@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Container, BackgroundImage, BackgroundImageContainer, HeaderText, RightSide, SubheaderText, TextOverlay, ContainerMain } from '../styles/loginScreen.styles';
 import FormComponent from '../components/Form';
 import {v4 as uuidv4} from 'uuid';
+import { format } from 'date-fns';
 
 interface Usuario {
   username: string;
   password: string;
+  created_at: Date;
 }
 
 const LoginScreen: React.FC = () => {
@@ -18,11 +20,14 @@ const LoginScreen: React.FC = () => {
   useEffect(() => {
     const usersString = localStorage.getItem('users');
     const userAlreadyExists = usersString ? JSON.parse(usersString).find((u: Usuario) => u.username === "Fortes") : false;
+    const currentDate = new Date();
+    const formattedDate = format(currentDate, 'dd/MM/yyyy HH:mm:ss');
     if(!userAlreadyExists) {
       const user = {
         id: uuidv4(),
         username: "Fortes",
-        password: "123"
+        password: "123",
+        created_at: formattedDate,
       };
       localStorage.setItem('users', JSON.stringify([user]));
     }
