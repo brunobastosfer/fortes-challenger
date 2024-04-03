@@ -8,7 +8,7 @@ import { useGlobalContext } from '../../shared/hooks/useGlobalContext';
 interface Usuario {
   username: string;
   password: string;
-  created_at: Date;
+  createdAt: Date;
 }
 
 const LoginScreen: React.FC = () => {
@@ -28,7 +28,7 @@ const LoginScreen: React.FC = () => {
         id: uuidv4(),
         username: "Fortes",
         password: "123",
-        created_at: formattedDate,
+        createdAt: formattedDate,
       };
       localStorage.setItem('users', JSON.stringify([user]));
     }

@@ -2,17 +2,19 @@ import { Button, Input, Space } from "antd"
 import { ForgetPassword, LoginForm, RegisterText } from "../styles/loginScreen.styles"
 import { FormEvent, useState } from "react";
 import {v4 as uuidv4} from 'uuid';
+import { useGlobalContext } from "../../shared/hooks/useGlobalContext";
+import { useNavigate } from "react-router-dom";
 
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { UserOutlined } from '@ant-design/icons';
 import Swal from 'sweetalert2';
-import { useGlobalContext } from "../../shared/hooks/useGlobalContext";
-import { useNavigate } from "react-router-dom";
+import { Alert, Spin } from 'antd';
+import { format } from "date-fns";
 
 interface Usuario {
   username: string;
   password: string;
-  created_at: Date;
+  createdAt: Date;
 }
 
 interface FormComponentProps {
@@ -23,7 +25,9 @@ interface FormComponentProps {
 const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterForm }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { isAuthenticated, setAcess } = useGlobalContext();
+  const [inputEmpty, setInputEmpty] = useState(false);
+  const [runSpinner, setRunSpinner] = useState(false);
+  const { setAcess } = useGlobalContext();
   const navigate = useNavigate();
 
   const handleSignin = (e: FormEvent) => {
@@ -31,10 +35,19 @@ const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterFor
     const usersString = localStorage.getItem('users');
     const users = usersString ? JSON.parse(usersString) : [];
     const user = users.find((u: Usuario) => u.username === username && u.password === password);
+    if(!username || !password) {
+      setInputEmpty(true);
+      return;
+    }
+
 
     if (user) {
-      setAcess(true);
-      navigate('/')
+      setRunSpinner(true);
+      setTimeout(() => {
+        setRunSpinner(false);
+        setAcess(true);
+        navigate('/')
+      }, 3000)
     } else {
       Swal.fire({
         icon: "error",
@@ -44,8 +57,17 @@ const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterFor
     }
   };
 
+  setTimeout(() => {
+    setInputEmpty(false);
+  }, 3000)
+
   const handleSignup = (e: FormEvent) => {
     e.preventDefault();
+    if(!username || !password) {
+      console.log('entrei')
+      setInputEmpty(true);
+      return;
+    }
     const usersString = localStorage.getItem('users');
     const userAlreadyExists = usersString ? JSON.parse(usersString).find((u: Usuario) => u.username === username) : false;
     if(userAlreadyExists){
@@ -57,11 +79,13 @@ const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterFor
       return;
     }
     const users = usersString ? JSON.parse(usersString) : [];
+    const currentDate = new Date();
+    const formattedDate = format(currentDate, 'dd/MM/yyyy HH:mm:ss');
     const user = {
       id: uuidv4(),
       username,
       password,
-      created_at: new Date(),
+      createdAt: formattedDate,
     };
     users.push(user);
     localStorage.setItem('users', JSON.stringify(users));
@@ -69,17 +93,27 @@ const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterFor
   };
   return (
     <LoginForm>
-      <Space direction="horizontal">
-        <Input style={{ marginBottom: 10 }} size="large" placeholder="Usuario" prefix={<UserOutlined />} onChange={ (e) => setUsername(e.target.value) }/>
-      </Space>
       <Space direction="vertical">
+        <Input style={{ marginBottom: !inputEmpty ? 10 : 0}} size="large" placeholder="Usuario" prefix={<UserOutlined />} onChange={ (e) => setUsername(e.target.value) }/>
+        {
+          inputEmpty && !username && (
+            <Alert message="O usuário é obrigatório." type="error" style={{ border: "none", background: "none" }}/>
+          )
+        }
+      </Space>
+      <Space direction="vertical" >
         <Input.Password
           placeholder="Password"
-          style={{ marginBottom: 10 }}
+          style={{ marginBottom: 0 }}
           iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
           size="large"
           onChange={ (e) => setPassword(e.target.value) }
         />
+          {
+          inputEmpty && !password && (
+            <Alert message="A senha é obrigatória." type="error" style={{ border: "none", background: "none" }}/>
+          )
+        }
       </Space>
       {
         !isRegisterForm && (
@@ -89,7 +123,7 @@ const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterFor
       {
         isRegisterForm 
         ?
-          <Button style={{ width: "100%" }} onClick={ handleSignup } formMethod='submit' type='primary' size='large'>Cadastrar</Button>
+          <Button style={{ width: "100%", marginTop: "10px" }} onClick={ handleSignup } formMethod='submit' type='primary' size='large'>Cadastrar</Button>
         :
           <Button style={{ width: "100%" }} onClick={ handleSignin } formMethod='submit' type='primary' size='large'>Entrar</Button> 
       }
@@ -107,6 +141,11 @@ const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterFor
             <br />
             Faça login.
           </RegisterText>
+        )
+      }
+      {
+        runSpinner && (
+          <Spin size="large" />
         )
       }
       </LoginForm>
