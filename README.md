@@ -8,7 +8,7 @@ Clone o repositório do projeto:
 ```bash
 git clone <URL_DO_REPOSITORIO>
 ```
-Navegue até o diretório do projeto:
+Navegue até o diretório do projeto.
 
 Instale as dependências:
 ```bash
