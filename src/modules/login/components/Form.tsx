@@ -4,18 +4,13 @@ import { FormEvent, useState } from "react";
 import {v4 as uuidv4} from 'uuid';
 import { useGlobalContext } from "../../shared/hooks/useGlobalContext";
 import { useNavigate } from "react-router-dom";
+import { Usuario } from "../../User/types/userType";
 
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { UserOutlined } from '@ant-design/icons';
 import Swal from 'sweetalert2';
 import { Alert, Spin } from 'antd';
 import { format } from "date-fns";
-
-interface Usuario {
-  username: string;
-  password: string;
-  createdAt: Date;
-}
 
 interface FormComponentProps {
   toggleForm: () => void;
@@ -64,7 +59,6 @@ const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterFor
   const handleSignup = (e: FormEvent) => {
     e.preventDefault();
     if(!username || !password) {
-      console.log('entrei')
       setInputEmpty(true);
       return;
     }

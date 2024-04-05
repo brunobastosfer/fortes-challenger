@@ -8,16 +8,10 @@ import { RouteObject, RouterProvider, createBrowserRouter } from 'react-router-d
 import type { Router as RemixRouter } from '@remix-run/router';
 import { GlobalProvider } from './modules/shared/hooks/useGlobalContext';
 import HomeScreen from './modules/home/screens';
+import { homeScreens } from './modules/home/routes';
+import { userScreens } from './modules/User/routes';
 
-const mainRoutes: RouteObject[] = [
-  {
-    path: '/',
-    element: < HomeScreen/>,
-    errorElement: <div>Erro</div>,
-  },
-]
-
-const router: RemixRouter = createBrowserRouter([...mainRoutes, ...loginRoutes]);
+const router: RemixRouter = createBrowserRouter([...homeScreens, ...loginRoutes, ...userScreens]);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
