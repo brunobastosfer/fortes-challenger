@@ -66,7 +66,7 @@ const UserInsert = () => {
             } 
             <Input.Password placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
             {
-              inputEmpty && !username && (
+              inputEmpty && !password && (
                 <Alert message="A senha é obrigatória." type="error" style={{ border: "none", background: "none" }}/>
               )
             } 
