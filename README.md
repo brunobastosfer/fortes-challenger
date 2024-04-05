@@ -1,7 +1,7 @@
-Descrição
+## Descrição
 Este é o frontend de um aplicativo web construído em ReactJS. O aplicativo possui funcionalidades de login e registro, utilizando o framework Ant Design para os componentes de interface do usuário.
 
-Instalação
+## Instalação
 Certifique-se de ter o Node.js instalado em sua máquina antes de prosseguir.
 
 Clone o repositório do projeto:
@@ -24,7 +24,7 @@ npm start
 ```
 Isso iniciará o servidor de desenvolvimento e abrirá o aplicativo no seu navegador padrão.
 
-Testes
+## Testes
 Para executar os testes, utilize o seguinte comando:
 
 ```bash
@@ -32,7 +32,7 @@ npm test
 ```
 Este comando executará os testes usando a biblioteca Jest.
 
-Dependências Principais
+## Dependências Principais
 React: Biblioteca JavaScript para construir interfaces de usuário.
 Ant Design: Framework de design de UI React.
 Styled Components: Biblioteca para estilizar componentes em React.
