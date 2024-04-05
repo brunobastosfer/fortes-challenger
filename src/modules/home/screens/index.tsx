@@ -17,6 +17,7 @@ const HomeScreen: React.FC = () => {
   const navigate = useNavigate();
 
   const data = users
+  console.log(data)
 
   useEffect(() => {
     if(!isAuthenticated.authenticated) {
