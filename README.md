@@ -33,8 +33,8 @@ npm test
 Este comando executará os testes usando a biblioteca Jest.
 
 ## Dependências Principais
-React: Biblioteca JavaScript para construir interfaces de usuário.
-Ant Design: Framework de design de UI React.
-Styled Components: Biblioteca para estilizar componentes em React.
-SweetAlert2: Biblioteca para exibir pop-ups de alerta bonitos e personalizáveis.
-Date-fns: Biblioteca para manipulação de datas em JavaScript.
+- **React**: Biblioteca JavaScript para construir interfaces de usuário.
+- **Ant Design**: Framework de design de UI React.
+- **Styled Components**: Biblioteca para estilizar componentes em React.
+- **SweetAlert2**: Biblioteca para exibir pop-ups de alerta bonitos e personalizáveis.
+- **Date-fns**: Biblioteca para manipulação de datas em JavaScript.
