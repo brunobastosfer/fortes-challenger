@@ -28,10 +28,23 @@ export const useUser = () => {
     return user;
   }
 
+  const getUserByUsername = (username: string) => {
+    const users = localStorage.getItem('users') ? JSON.parse(localStorage.getItem('users') as string) : [];
+    const user = users.find((u: Usuario) => u.username === username);
+    return user;
+  }
+
+  const getUsers = () => {
+    const users = localStorage.getItem('users') ? JSON.parse(localStorage.getItem('users') as string) : [];
+    return users;
+  }
+
   return {
     handleEdit,
     getUser,
     handleRemove,
-    handleDetails
+    handleDetails,
+    getUserByUsername,
+    getUsers
   };
 }

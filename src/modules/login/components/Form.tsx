@@ -11,6 +11,7 @@ import { UserOutlined } from '@ant-design/icons';
 import Swal from 'sweetalert2';
 import { Alert, Spin } from 'antd';
 import { format } from "date-fns";
+import ForgetPasswordScreen from "../screens/ForgetPassword";
 
 interface FormComponentProps {
   toggleForm: () => void;
@@ -85,6 +86,11 @@ const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterFor
     localStorage.setItem('users', JSON.stringify(users));
     toggleForm();
   };
+
+  const handleForgetPassword = () => {
+    navigate('/login/forget-password');
+  }
+
   return (
     <LoginForm>
       <Space direction="vertical">
@@ -111,7 +117,7 @@ const FormComponent: React.FC<FormComponentProps> = ({ toggleForm, isRegisterFor
       </Space>
       {
         !isRegisterForm && (
-          <ForgetPassword>Esqueci minha senha</ForgetPassword>
+          <ForgetPassword onClick={handleForgetPassword}>Esqueci minha senha</ForgetPassword>
         )
       }
       {
