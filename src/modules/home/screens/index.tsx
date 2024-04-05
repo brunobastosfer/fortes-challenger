@@ -17,6 +17,7 @@ const HomeScreen: React.FC = () => {
   const navigate = useNavigate();
 
   const data = users
+  console.log(data)
 
   useEffect(() => {
     if(!isAuthenticated.authenticated) {
@@ -38,7 +39,6 @@ const HomeScreen: React.FC = () => {
   const handleLogout = () => {
     setAcess(false);
     navigate('/login');
-    console.log("cliquei")
   }
 
   const columns: TableProps<Usuario>['columns'] = [

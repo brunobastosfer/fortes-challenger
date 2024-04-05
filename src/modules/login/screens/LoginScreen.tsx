@@ -3,6 +3,7 @@ import { Container, BackgroundImage, BackgroundImageContainer, HeaderText, Right
 import FormComponent from '../components/Form';
 import {v4 as uuidv4} from 'uuid';
 import { format } from 'date-fns';
+import { useGlobalContext } from '../../shared/hooks/useGlobalContext';
 
 interface Usuario {
   username: string;
@@ -12,6 +13,7 @@ interface Usuario {
 
 const LoginScreen: React.FC = () => {
   const [isRegisterForm, setIsRegisterForm] = useState(false);
+  const { newUsers } = useGlobalContext();
 
   const toggleForm = () => {
     setIsRegisterForm(!isRegisterForm);
@@ -23,13 +25,13 @@ const LoginScreen: React.FC = () => {
     const currentDate = new Date();
     const formattedDate = format(currentDate, 'dd/MM/yyyy HH:mm:ss');
     if(!userAlreadyExists) {
-      const user = {
+      const user = [{
         id: uuidv4(),
         username: "Fortes",
         password: "123",
         createdAt: formattedDate,
-      };
-      localStorage.setItem('users', JSON.stringify([user]));
+      }];
+      newUsers(user);
     }
   }, [])
 

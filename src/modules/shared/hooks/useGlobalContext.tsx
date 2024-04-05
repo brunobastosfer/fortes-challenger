@@ -6,13 +6,6 @@ interface GlobalData {
   authenticated: boolean;
 }
 
-interface User {
-  id: string;
-  username: string;
-  password: string;
-  createdAt: string;
-}
-
 interface GlobalContextProps {
   isAuthenticated: GlobalData;
   setIsAuthenticated: (globalData: GlobalData) => void;
