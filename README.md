@@ -9,9 +9,7 @@ Clone o repositório do projeto:
 git clone <URL_DO_REPOSITORIO>
 ```
 Navegue até o diretório do projeto:
-```bash
-cd frontend
-```
+
 Instale as dependências:
 ```bash
 npm install
