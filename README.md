@@ -1,4 +1,3 @@
-Frontend
 Descrição
 Este é o frontend de um aplicativo web construído em ReactJS. O aplicativo possui funcionalidades de login e registro, utilizando o framework Ant Design para os componentes de interface do usuário.
 
