@@ -39,7 +39,6 @@ const HomeScreen: React.FC = () => {
   const handleLogout = () => {
     setAcess(false);
     navigate('/login');
-    console.log("cliquei")
   }
 
   const columns: TableProps<Usuario>['columns'] = [
