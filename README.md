@@ -10,30 +10,28 @@ Clone o repositório do projeto:
 git clone <URL_DO_REPOSITORIO>
 ```
 Navegue até o diretório do projeto:
-bash
-Copy code
+```bash
 cd frontend
+```
 Instale as dependências:
-Copy code
+```bash
 npm install
+```
 Uso
 Para iniciar o aplicativo em modo de desenvolvimento, execute o seguinte comando:
 
-sql
-Copy code
+```bash
 npm start
+```
 Isso iniciará o servidor de desenvolvimento e abrirá o aplicativo no seu navegador padrão.
 
 Testes
 Para executar os testes, utilize o seguinte comando:
 
-bash
-Copy code
+```bash
 npm test
+```
 Este comando executará os testes usando a biblioteca Jest.
-
-Contribuição
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
 
 Dependências Principais
 React: Biblioteca JavaScript para construir interfaces de usuário.
