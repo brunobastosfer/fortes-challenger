@@ -3,13 +3,24 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { loginRoutes } from './modules/login/routes/loginRoutes';
+import { RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import type { Router as RemixRouter } from '@remix-run/router';
+import { GlobalProvider } from './modules/shared/hooks/useGlobalContext';
+import HomeScreen from './modules/home/screens';
+import { homeScreens } from './modules/home/routes';
+import { userScreens } from './modules/User/routes';
+
+const router: RemixRouter = createBrowserRouter([...homeScreens, ...loginRoutes, ...userScreens]);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <GlobalProvider>
+      <RouterProvider router={router} />
+    </GlobalProvider>
   </React.StrictMode>
 );
 
