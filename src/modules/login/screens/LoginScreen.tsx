@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, BackgroundImage, BackgroundImageContainer, HeaderText, RightSide, SubheaderText, TextOverlay, ContainerMain } from '../styles/loginScreen.styles';
 import FormComponent from '../components/Form';
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { format } from 'date-fns';
 import { useGlobalContext } from '../../shared/hooks/useGlobalContext';
 
@@ -24,7 +24,7 @@ const LoginScreen: React.FC = () => {
     const userAlreadyExists = usersString ? JSON.parse(usersString).find((u: Usuario) => u.username === "Fortes") : false;
     const currentDate = new Date();
     const formattedDate = format(currentDate, 'dd/MM/yyyy HH:mm:ss');
-    if(!userAlreadyExists) {
+    if (!userAlreadyExists) {
       const user = [{
         id: uuidv4(),
         username: "Fortes",

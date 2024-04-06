@@ -31,6 +31,11 @@ export const BackgroundImageContainer = styled.div`
   position: relative;
   flex: 0 0 70%;
   overflow: hidden;
+  
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const BackgroundImage = styled.img`
@@ -85,3 +90,11 @@ export const RegisterForm = styled.form`
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 10px;
 `;
+
+// export const FormContainer = styled.div<{ isHidden: boolean }>`
+//   display: ${(props) => (props.isHidden ? 'none' : 'block')};
+
+//   @media (max-width: 768px) {
+//     display: block;
+//   }
+// `;

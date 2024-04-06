@@ -101,7 +101,7 @@ const HomeScreen: React.FC = () => {
         />
         <ContainerScreen>
         <Button type="primary" onClick={() => navigate('/new-user')}>Inserir</Button>
-        <Table columns={columns} dataSource={data}/>
+          <Table columns={columns} dataSource={data} scroll={{ x: 500 }}/>
         </ContainerScreen>
       </Screen>
     </>
